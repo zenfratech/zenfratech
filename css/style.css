@@ -1,0 +1,151 @@
+/* -----------------------------
+   Base HTML & Body
+----------------------------- */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    padding-top: 70px; /* for fixed-top navbar */
+    font-family: "Segoe UI", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* -----------------------------
+   Content wrapper
+   Ensures sticky footer
+----------------------------- */
+.content {
+    flex: 1 0 auto; /* Grow and shrink as needed */
+}
+
+/* -----------------------------
+   Hero Section
+----------------------------- */
+.hero {
+  width: 100vw;
+  height: 60vh;
+  min-height: 200px;
+  max-height: 500px;
+
+  /* background-image: url("../assets/images/home.png"); */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  overflow: hidden;
+}
+
+
+
+
+
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* -----------------------------
+   Cards
+----------------------------- */
+.card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-title {
+    color: #0a2540;
+    font-weight: bold;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* -----------------------------
+   Buttons
+----------------------------- */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* -----------------------------
+   Footer
+----------------------------- */
+footer {
+    flex-shrink: 0; /* don’t shrink */
+    background-color: #212529; /* match navbar */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* -----------------------------
+   Section styling
+----------------------------- */
+section {
+    padding: 60px 0;
+}
+
+section.bg-light {
+    background-color: #f8f9fa;
+}
+
+/* -----------------------------
+   Navbar adjustments
+----------------------------- */
+.navbar-nav .nav-link {
+    font-weight: 500;
+    
+}
+
+.navbar-nav .nav-link.active {
+    color: #0d6efd !important;
+}
+
+/* -----------------------------
+   Responsive adjustments
+----------------------------- */
+@media (max-width: 768px) {
+    .hero {
+        height: 70vh;
+        padding: 0 15px;
+    }
+
+    .card-img-top {
+        height: 180px;
+    }
+}
+
+
+.nav-right-space {
+  padding-right: 30px; /* increase to 40px or 50px if needed */
+}
+
+
