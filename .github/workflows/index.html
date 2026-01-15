@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zenfra Technologies | Cloud & Digital Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    html, body { height: 100%; margin: 0; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      padding-top: 70px;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    main { flex: 1; }
+
+    /* NAVBAR */
+    .navbar { background: #fff; }
+    .navbar-brand, .nav-link { color: #030303 !important; font-weight: 500; }
+    .nav-link { opacity: .85; min-width: 70px; text-align: center; position: relative; }
+    .nav-link.active { opacity: 1; }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: #000;
+    }
+
+    .brand-multicolor {
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-tech {
+      background: linear-gradient(90deg, #0c0c0c, #c9af95);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-tech {
+      background: linear-gradient(90deg, #ff7a18, #ffb347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+
+
+
+    /* HERO */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(180deg, #fff, #f8f9fa);
+      text-align: center;
+    }
+
+    .hero-slider { overflow: hidden; position: relative; }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(25px) scale(0.98);
+      transition: all 1s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-slide.active { opacity: 1; transform: translateY(0) scale(1); position: relative; }
+
+    .hero-slide h1 {
+      font-weight: 700;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hero-slider::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("../assets/images/icon.jpg") center center / cover no-repeat;
+    }
+
+
+    .hero-slide h1::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      height: 4px;
+      width: 60%;
+      background: #000;
+      border-radius: 4px;
+    }
+
+    .hero-slide p { max-width: 640px; color: #555; }
+
+    .hero-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .hero-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #bbb;
+      transition: all .3s ease;
+    }
+
+    .hero-dot.active { background: #000; transform: scale(1.4); }
+
+    /* CARDS */
+    .card {
+      border: none;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.12); }
+
+    .card-img-wrapper { overflow: hidden; }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+
+    .card:hover .card-img-top { transform: scale(1.1); }
+
+    /* MAIN FOOTER */
+    .footer-main {
+      background: #faf9f9;
+      color: #020202;
+      padding: 60px 0 40px;
+    }
+
+    .footer-title {
+      color: #0c0c0c;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .footer-text {
+      font-size: 14.5px;
+      line-height: 1.7;
+      opacity: 0.9;
+    }
+
+    .footer-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    /* FOOTER MAP */
+    .footer-map {
+      width: 100%;
+      height: 180px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .footer-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+
+    .footer-list li {
+      font-size: 14.5px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 14.5px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #080808;
+    }
+
+
+
+
+    /* CEO SECTION ANIMATION */
+    .ceo-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ceo-img-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .ceo-img-wrapper::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #000, #666);
+      opacity: 0.15;
+      z-index: -1;
+      transform: scale(0.9);
+      animation: pulseGlow 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(0.9); opacity: 0.15; }
+      50% { transform: scale(1.05); opacity: 0.3; }
+    }
+
+    /* Smooth hover lift */
+    .ceo-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      transition: transform .6s ease, box-shadow .6s ease;
+    }
+
+    .ceo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0,0,0,.15);
+    }
+
+    /* Text reveal animation */
+    .ceo-text {
+      animation: fadeSlideUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* FEATURE CARDS */
+    .feature-card { background: #fff; border-radius: 12px; padding: 30px 20px; transition: transform .3s ease; }
+    .feature-card:hover { transform: translateY(-5px); }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand brand-multicolor" href="index.html">
+      <span class="brand-zenfra">Zenfra</span>
+      <span class="brand-tech">Technologies</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO SLIDER -->
+<section class="hero hero-slider">
+  <div class="container position-relative">
+
+    <div class="hero-slide active">
+      <h1 class="display-5 mb-3">Cloud & Digital Transformation</h1>
+      <p class="lead mb-4">Modernize applications and accelerate innovation with cloud-native solutions.</p>
+      <a href="services.html" class="btn btn-dark btn-lg">Explore Services</a>
+    </div>
+
+    <div class="hero-slide">
+      <h1 class="display-5 mb-3">AI-Driven Insights</h1>
+      <p class="lead mb-4">Predictive analytics, machine learning, and intelligent automation.</p>
+      <a href="services.html" class="btn btn-dark btn-lg">AI Solutions</a>
+    </div>
+
+    <div class="hero-slide">
+      <h1 class="display-5 mb-3">Secure Cloud Migration</h1>
+      <p class="lead mb-4">AWS, Azure & GCP migrations with security and zero downtime.</p>
+      <a href="services.html" class="btn btn-dark btn-lg">Migration Services</a>
+    </div>
+
+    <div class="hero-slide">
+      <h1 class="display-5 mb-3">DevOps Automation</h1>
+      <p class="lead mb-4">CI/CD pipelines, infrastructure as code, and faster releases.</p>
+      <a href="services.html" class="btn btn-dark btn-lg">DevOps Services</a>
+    </div>
+
+    <div class="hero-slide">
+      <h1 class="display-5 mb-3">Enterprise Cloud Security</h1>
+      <p class="lead mb-4">Zero-trust architecture, compliance, and cloud risk management.</p>
+      <a href="services.html" class="btn btn-dark btn-lg">Security Solutions</a>
+    </div>
+
+  </div>
+
+  <div class="hero-dots">
+    <div class="hero-dot active"></div>
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="container py-5">
+  <div class="row g-4">
+    <div class="col-md-4" data-aos="fade-up"><div class="card h-100"><div class="card-img-wrapper"><img src="../assets/images/cloud-migration.jpg" class="card-img-top" alt="Cloud Migration"></div><div class="card-body"><h5>Cloud & Digital Transformation</h5><p>Scalable cloud architectures for modern enterprises.</p></div></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="card h-100"><div class="card-img-wrapper"><img src="../assets/images/AI & Analytics.webp" class="card-img-top" alt="AI & Analytics"></div><div class="card-body"><h5>AI & Data Analytics</h5><p>Data-driven intelligence and predictive analytics.</p></div></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"><div class="card h-100"><div class="card-img-wrapper"><img src="../assets/images/devops.webp" class="card-img-top" alt="DevOps Automation"></div><div class="card-body"><h5>DevOps & Automation</h5><p>CI/CD pipelines and infrastructure automation.</p></div></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300"><div class="card h-100"><div class="card-img-wrapper"><img src="../assets/images/Secure Cloud Migration.jpg" class="card-img-top" alt="Secure Cloud Migration"></div><div class="card-body"><h5>Secure Cloud Migration</h5><p>AWS, Azure, and GCP migrations with minimal downtime and enterprise-grade security.</p></div></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="400"><div class="card h-100"><div class="card-img-wrapper"><img src="../assets/images/Enterprise Cloud Security.webp" class="card-img-top" alt="Enterprise Cloud Security"></div><div class="card-body"><h5>Enterprise Cloud Security</h5><p>Zero-trust security, compliance management, and proactive cloud threat protection.</p></div></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="500"><div class="card h-100"><div class="card-img-wrapper"><img src="../assets/images/Application Modernization.webp" class="card-img-top" alt="Application Modernization"></div><div class="card-body"><h5>Application Modernization</h5><p>Microservices, containers, and cloud-native technologies to modernize legacy applications.</p></div></div></div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="py-5 bg-light rounded-4" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-4">Why Choose Zenfra Technologies?</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="50"><h3>Expertise</h3><p>Years of experience in cloud, DevOps, security, and AI-driven solutions.</p></div></div>
+      <div class="col-md-4"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="100"><h3>Security-First</h3><p>Enterprise-grade solutions with compliance and risk management at the core.</p></div></div>
+      <div class="col-md-4"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="150"><h3>Business-Focused</h3><p>We align technology with measurable business outcomes and ROI.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR VALUES -->
+<section class="py-5" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-4">Our Values</h2>
+    <div class="row g-4">
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="50"><h3>Innovation</h3><p>We embrace new technologies and methods to drive progress.</p></div></div>
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="100"><h3>Integrity</h3><p>We act with honesty and transparency in every project.</p></div></div>
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="150"><h3>Collaboration</h3><p>We work closely with clients and teams for better results.</p></div></div>
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="200"><h3>Excellence</h3><p>We deliver high-quality solutions that exceed expectations.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="py-5 bg-light" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-4">Our Achievements</h2>
+    <div class="row g-4">
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="50"><h3>0+</h3><p>Projects Delivered</p></div></div>
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="100"><h3>0+</h3><p>Satisfied Clients</p></div></div>
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="150"><h3>5+</h3><p>Expert Engineers</p></div></div>
+      <div class="col-md-3"><div class="feature-card shadow" data-aos="zoom-in" data-aos-delay="200"><h3>1+</h3><p>Years of Excellence</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT TESTIMONIALS -->
+<!-- <section class="py-5" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center mb-5">What Our Clients Say</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="feature-card shadow p-4" data-aos="zoom-in" data-aos-delay="50"><p>"Zaid Technologies transformed our cloud infrastructure. Professional and reliable!"</p><h5 class="mt-3">— John Doe, CTO at TechCorp</h5></div></div>
+      <div class="col-md-4"><div class="feature-card shadow p-4" data-aos="zoom-in" data-aos-delay="100"><p>"Their DevOps automation reduced our release cycles by 50%. Highly recommend!"</p><h5 class="mt-3">— Sarah Lee, Product Manager</h5></div></div>
+      <div class="col-md-4"><div class="feature-card shadow p-4" data-aos="zoom-in" data-aos-delay="150"><p>"Expert team and great communication. Cloud migration was seamless."</p><h5 class="mt-3">— Michael Smith, CIO at FinServe</h5></div></div>
+    </div>
+  </div>
+</section> -->
+
+<!-- CTA -->
+<section class="hero">
+  <div class="container text-center" data-aos="fade-up">
+    <h1>Transform Your Business</h1>
+    <p class="mt-3">Modernize, migrate, and innovate with confidence.</p>
+    <a href="contact.html" class="btn btn-dark btn-lg mt-3">Talk to Experts</a>
+  </div>
+</section>
+
+<!-- CEO MESSAGE -->
+<!-- CEO MESSAGES -->
+<section class="py-5 bg-light ceo-section">
+  <div class="container">
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- CEO 1 -->
+      <div class="col-lg-6" data-aos="zoom-in">
+        <div class="row align-items-center g-4 ceo-card h-100">
+
+          <div class="col-md-4 text-center" data-aos="fade-right">
+            <div class="ceo-img-wrapper">
+              <img
+                src="../assets/images/ceo.png"
+                alt="CEO - Zenfra Technologies"
+                class="img-fluid rounded-circle shadow"
+                style="width:200px;height:200px;object-fit:cover;">
+            </div>
+          </div>
+
+          <div class="col-md-8 ceo-text" data-aos="fade-left">
+            <h3 class="mb-3">Message from Our CEO</h3>
+
+            <p class="text-muted">
+              At Zenfra Technologies, our mission is to help businesses innovate
+              with confidence using cloud, AI, and secure digital platforms.
+            </p>
+
+            <h5 class="mt-3 mb-1 fw-semibold">Banawath Balaji Naik</h5>
+            <p class="text-muted mb-0">Founder & CEO</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CEO 2 -->
+      <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="150">
+        <div class="row align-items-center g-4 ceo-card h-100">
+
+          <div class="col-md-4 text-center" data-aos="fade-right">
+            <div class="ceo-img-wrapper">
+              <img
+                src="../assets/images/Co-Founder & CTO.png"
+                alt="Co-Founder - Zenfra Technologies"
+                class="img-fluid rounded-circle shadow"
+                style="width:200px;height:200px;object-fit:cover;">
+            </div>
+          </div>
+
+          <div class="col-md-8 ceo-text" data-aos="fade-left">
+            <h3 class="mb-3">Message from Our Co-Founder</h3>
+
+            <p class="text-muted">
+              We focus on building scalable, secure, and future-ready solutions
+              that drive real business value for our clients.
+            </p>
+
+            <h5 class="mt-3 mb-1 fw-semibold">Shaik Shaestha</h5>
+            <p class="text-muted mb-0">Co-Founder & CTO</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+</main>
+
+<!-- MAIN FOOTER -->
+<footer class="footer-main">
+  <div class="container">
+    <div class="row gy-4">
+
+      <!-- Company Info -->
+      <div class="col-lg-4 col-md-6">
+        <h5 class="footer-title">Zenfra Technologies</h5>
+        <p class="footer-text">
+          Delivering cloud, DevOps, AI, and secure digital solutions to help
+          businesses scale with confidence.
+        </p>
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col-lg-3 col-md-6">
+        <h5 class="footer-title">Contact Us</h5>
+        <ul class="footer-list">
+          <li><strong>Email:</strong> info@zenfratech.com</li>
+          <li><strong>Phone:</strong> +91 9177896464</li>
+          <li><strong>Support:</strong> support@zenfratech.com</li>
+        </ul>
+      </div>
+
+      <!-- Office Address -->
+      <div class="col-lg-3 col-md-6">
+        <h5 class="footer-title">Office Address</h5>
+
+        <p class="footer-text mb-2">
+          Zenfra Technologies<br>
+          Near Labour Office, Nehru Nagar<br>
+          Madanapalle, Andhra Pradesh<br>
+          Pin Code: 517325<br>
+          India
+        </p>
+
+        <!-- Google Map Embed -->
+        <div class="footer-map">
+          <iframe
+            src="https://www.google.com/maps?q=13.546732,78.506215&z=16&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+
+
+      <!-- Quick Links -->
+      <div class="col-lg-2 col-md-6">
+        <h5 class="footer-title">Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  AOS.init({ duration: 900, once: true });
+
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((s, i) => { s.classList.toggle('active', i === index); });
+    dots.forEach((d, i) => { d.classList.toggle('active', i === index); });
+  }
+
+  setInterval(() => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }, 4500);
+</script>
+
+</body>
+</html>
